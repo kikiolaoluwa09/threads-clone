@@ -3,7 +3,7 @@ import Feather from "@expo/vector-icons/Feather";
 
 export default function TabsLayout() {
   return (
-    <Tabs screenOptions={{tabBarActiveTintColor: 'black'}}>
+    <Tabs>
       <Tabs.Screen
         name="index"
         options={{
