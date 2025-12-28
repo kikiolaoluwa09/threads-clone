@@ -41,7 +41,7 @@ export const dummyUsers: User[] = [
 export const dummyPosts: Post[] = [
   {
     id: '1',
-    createdAt: '2023-01-01T10:00:00Z',
+    createdAt: '2025-12-29T10:00:00Z',
     content: 'Hey everyone! 🚀 Just started learning React Native and it\'s absolutely mind-blowing! The way components come together is so elegant. Excited to build my first cross-platform app! Who\'s been using RN for a while? Any tips? #ReactNative #MobileDev #Coding',
     user_id: '1',
     user: dummyUsers[0],
@@ -51,7 +51,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '2',
-    createdAt: '2023-01-02T11:00:00Z',
+    createdAt: '2025-12-29T11:00:00Z',
     content: 'Chess anyone? ♟️ I\'m feeling strategic today. Online or in-person? Let\'s set up a match! Been practicing my openings lately. What\'s your favorite chess variant? #Chess #StrategyGames #WeekendVibes',
     user_id: '2',
     user: dummyUsers[1],
@@ -61,7 +61,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '3',
-    createdAt: '2023-01-03T12:00:00Z',
+    createdAt: '2025-12-29T12:00:00Z',
     content: 'Working on a fresh UI design for my latest project! 🎨 Loving the minimalist approach with some bold accents. Feedback appreciated! Should I go with more gradients or keep it clean? Swipe for before/after. #UIDesign #UX #DesignCommunity',
     user_id: '3',
     user: dummyUsers[2],
@@ -71,7 +71,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '4',
-    createdAt: '2023-01-04T13:00:00Z',
+    createdAt: '2025-12-29T13:00:00Z',
     content: 'Back from an incredible trip to the Amazon! 🌿 The biodiversity there is unreal. Saw so many exotic birds and wildlife. Nature truly is the best artist. Grateful for these adventures! #Travel #Nature #AmazonRainforest',
     user_id: '4',
     user: dummyUsers[3],
@@ -81,7 +81,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '5',
-    createdAt: '2023-01-05T14:00:00Z',
+    createdAt: '2025-12-29T14:00:00Z',
     content: 'Sunset magic today! 🌅 Captured this golden hour shot that just hits different. Photography is my therapy. What\'s your favorite time of day to shoot? #Photography #Sunset #NaturePhotography',
     user_id: '5',
     user: dummyUsers[4],
@@ -91,7 +91,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '6',
-    createdAt: '2023-01-06T15:00:00Z',
+    createdAt: '2025-12-29T15:00:00Z',
     content: 'Diving deep into TypeScript for my new project! 💻 The type safety is a game-changer. No more runtime surprises! Loving how it scales. TS devs, what\'s your favorite feature? #TypeScript #JavaScript #WebDev',
     user_id: '1',
     user: dummyUsers[0],
@@ -101,7 +101,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '7',
-    createdAt: '2023-01-07T16:00:00Z',
+    createdAt: '2025-12-29T16:00:00Z',
     content: 'Just finished \'The Master Algorithm\' by Pedro Domingos! 📖 Mind-expanding read on AI and machine learning. The quest for the universal learner is fascinating. Highly recommend to anyone interested in tech\'s future! #AI #MachineLearning #Books',
     user_id: '2',
     user: dummyUsers[1],
@@ -111,7 +111,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '8',
-    createdAt: '2023-01-08T17:00:00Z',
+    createdAt: '2025-12-29T17:00:00Z',
     content: 'Sketching logo concepts for a client! ✏️ Going for something modern and memorable. Clean lines, bold colors. Which one speaks to you? A, B, or C? #LogoDesign #Branding #GraphicDesign',
     user_id: '3',
     user: dummyUsers[2],
@@ -121,7 +121,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '9',
-    createdAt: '2023-01-09T18:00:00Z',
+    createdAt: '2025-12-29T18:00:00Z',
     content: 'Planning my next mountain adventure! 🏔️ The Rockies are calling. Hiking boots ready, backpack packed. Anyone have trail recommendations? Safety first, but adventure always! #Hiking #Mountains #OutdoorLife',
     user_id: '4',
     user: dummyUsers[3],
@@ -131,7 +131,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '10',
-    createdAt: '2023-01-10T19:00:00Z',
+    createdAt: '2025-12-29T19:00:00Z',
     content: 'Editing photos from my recent European trip! 📸 Paris, Rome, Barcelona - each city has its own magic. Loving the street photography vibe. What\'s your go-to editing app? #TravelPhotography #PhotoEditing #Wanderlust',
     user_id: '5',
     user: dummyUsers[4],
@@ -141,7 +141,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '11',
-    createdAt: '2023-01-01T11:00:00Z',
+    createdAt: '2025-12-29T11:00:00Z',
     content: 'React Native is amazing! Have you tried Expo? It makes setup so much easier. Plus, the hot reload is a lifesaver! 🚀 #Expo #ReactNative',
     user_id: '2',
     user: dummyUsers[1],
@@ -151,7 +151,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '12',
-    createdAt: '2023-01-02T12:00:00Z',
+    createdAt: '2025-12-29T12:00:00Z',
     content: 'I\'m down! Let\'s do online. What\'s your preferred platform? Chess.com or Lichess? I can play tonight after work. ♟️ #Chess #GameNight',
     user_id: '3',
     user: dummyUsers[2],
@@ -161,7 +161,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '13',
-    createdAt: '2023-01-03T13:00:00Z',
+    createdAt: '2025-12-29T13:00:00Z',
     content: 'Looks fantastic! Maybe add some subtle gradients for depth? The current design is already clean though. Loving the color palette! 🎨 #DesignFeedback #UI',
     user_id: '4',
     user: dummyUsers[3],
@@ -171,7 +171,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '14',
-    createdAt: '2023-01-04T14:00:00Z',
+    createdAt: '2025-12-29T14:00:00Z',
     content: 'That sounds epic! Please share some pics when you can. The Amazon has always been on my bucket list. 🌿 #TravelEnvy #Adventure',
     user_id: '5',
     user: dummyUsers[4],
@@ -181,7 +181,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: '15',
-    createdAt: '2023-01-05T15:00:00Z',
+    createdAt: '2025-12-29T15:00:00Z',
     content: 'Stunning shot! The colors are incredible. I used a Canon EOS R5 for my recent shoots. What\'s your setup? 📷 #Photography #GearTalk',
     user_id: '1',
     user: dummyUsers[0],
