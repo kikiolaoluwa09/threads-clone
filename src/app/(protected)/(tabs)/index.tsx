@@ -12,10 +12,12 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => (
           <Link href="/new">
-            <Pressable className="bg-black p-4 border-b border-gray-800/70 ">
-              <Text style={{color: "#3b82f6"}} className="text-center text-3xl font-bold ">
-                New Post
-              </Text>
+            <Pressable>
+              <View className="bg-black p-4 border-b border-gray-800/70 text-blue-500">
+                <Text className="text-center text-3xl font-bold ">
+                  New Post
+                </Text>
+              </View>
             </Pressable>
           </Link>
         )}
