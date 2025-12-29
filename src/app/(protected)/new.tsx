@@ -17,7 +17,7 @@ export default function NewPostScreen() {
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 900 : 0}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 140 : 0}
       >
         <Text className="text-white font-extrabold text-xl">username</Text>
 
