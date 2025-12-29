@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pressable, Text, TextInput, View, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
+import { supabase } from "@/lib/supabase";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,10 @@ export default function LoginScreen() {
     try {
       setLoading(true);
       // Handle login logic here
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      
+      if (error) Alert.alert(error.message);
       console.log("Login:", { email, password });
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
