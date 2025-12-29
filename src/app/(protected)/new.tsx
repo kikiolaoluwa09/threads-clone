@@ -15,7 +15,7 @@ export default function NewPostScreen() {
   return (
     <SafeAreaView className="p-4 flex-1 bg-black">
       <KeyboardAvoidingView
-        className="flex-1"
+        className=""
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 140 : 0}
       >

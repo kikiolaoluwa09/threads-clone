@@ -11,15 +11,20 @@ export default function HomeScreen() {
         renderItem={({ item }) => <PostListItem post={item} />}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => (
-          <Link href="/new">
-            <Pressable>
-              <View className="bg-black p-4 border-b border-gray-800/70 text-blue-500">
-                <Text className="text-center text-3xl font-bold ">
-                  New Post
-                </Text>
-              </View>
-            </Pressable>
-          </Link>
+          <>
+            <Link
+              href="/new"
+              className="bg-black p-4 border-b border-gray-800/70 text-blue-500"
+            >
+              <Text className="text-center text-3xl font-bold ">New Post</Text>
+            </Link>
+            <Link
+              href="/login"
+              className="bg-black p-4 border-b border-gray-800/70 text-blue-500"
+            >
+              <Text className="text-center text-3xl font-bold ">login</Text>
+            </Link>
+          </>
         )}
       />
     </View>
