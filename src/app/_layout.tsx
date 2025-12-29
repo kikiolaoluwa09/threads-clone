@@ -2,7 +2,8 @@ import { Slot } from "expo-router";
 import "../../global.css";
 
 import { ThemeProvider, DarkTheme } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthProvider } from "@/providers/AuthProviders";
+
 const myTheme = {
   ...DarkTheme,
   colors: {
@@ -15,7 +16,9 @@ const myTheme = {
 export default function RootLayout() {
   return (
     <ThemeProvider value={myTheme}>
-      <Slot />
+      <AuthProvider>
+        <Slot />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

@@ -14,15 +14,9 @@ export default function HomeScreen() {
           <>
             <Link
               href="/new"
-              className="bg-black p-4 border-b border-gray-800/70 text-blue-500"
+              className="bg-black text-center p-4 border-b border-gray-800/70 text-blue-500"
             >
               <Text className="text-center text-3xl font-bold ">New Post</Text>
-            </Link>
-            <Link
-              href="/login"
-              className="bg-black p-4 border-b border-gray-800/70 text-blue-500"
-            >
-              <Text className="text-center text-3xl font-bold ">login</Text>
             </Link>
           </>
         )}
