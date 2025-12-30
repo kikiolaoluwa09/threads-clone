@@ -6,30 +6,45 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/providers/AuthProviders";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { router } from "expo-router";
+
+const CreatePost = async (content: string, user_id: string) => {
+  const { data, error } = await supabase
+    .from("posts")
+    .insert({ content, user_id })
+    .throwOnError()
+    .select("*");
+
+  return data;
+};
+
 export default function NewPostScreen() {
   const [text, setText] = useState("");
 
   const { user } = useAuth();
 
-  const onSubmit = async () => {
-    if (!text || !user) return;
+  const queryClient = useQueryClient();
 
-    const { data, error } = await supabase
-      .from("posts")
-      .insert({ content: text, user_id: user.id })
-      .select();
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: () => CreatePost(text, user!.id),
 
-    if (error) {
+    onSuccess: (data) => {
+      setText("");
+      router.back();
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+    onError: (error) => {
       console.error(error);
-    }
-    setText("");
-  };
+    },
+  });
 
   return (
     <SafeAreaView className="p-4 flex-1 bg-black">
@@ -49,10 +64,14 @@ export default function NewPostScreen() {
           multiline
           numberOfLines={4}
         />
+        {error && (
+          <Text className="text-red-500 text-sm mt-4">{error.message}</Text>
+        )}
         <View className="mt-auto">
           <Pressable
-            onPress={onSubmit}
-            className="bg-white p-3 px-6  self-end rounded-full"
+            onPress={() => mutate()}
+            className={`${isPending ? `bg-white/50` : `bg-white`}  p-3 px-6  self-end rounded-full`}
+            disabled={isPending}
           >
             <Text className="text-black font bold">Post</Text>
           </Pressable>
