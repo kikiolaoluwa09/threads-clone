@@ -8,6 +8,15 @@ export default function TabsLayout() {
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: { height: 90 },
+        headerStyle: {
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
+        },
+        headerTitleStyle: {
+          fontSize: 36,
+          fontWeight: "bold",
+          color: "white",
+        },
+        headerTransparent: true,
       }}
     >
       <Tabs.Screen
@@ -34,7 +43,7 @@ export default function TabsLayout() {
           title: "Plus",
           tabBarIcon: ({ size, color }) => (
             <View className="bg-gray-800 rounded-2xl p-3 w-14 h-14 items-center justify-center">
-              <Feather name="plus" size={20} color="white" />
+              <Feather name="plus" size={size} color={color} />
             </View>
           ),
         }}
