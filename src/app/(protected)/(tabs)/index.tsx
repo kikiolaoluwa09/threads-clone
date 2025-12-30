@@ -1,30 +1,58 @@
-import { FlatList, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 
 import PostListItem from "@/components/PostListitem";
 import { Link } from "expo-router";
-import { useEffect, useState } from "react";
 import { Post } from "@/types";
 import { supabase } from "@/lib/supabase";
+import { useQuery } from "@tanstack/react-query";
 
 export default function HomeScreen() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const fetchPosts = async () => {
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*, user:profiles(*)")
+      .throwOnError();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const { data, error } = await supabase.from("posts").select("*, user:profiles(*)");
-      if (error) {
-        console.error(error);
-      }
-      setPosts(data as Post[]);
-    };
-    fetchPosts();
-  }, []);
+    if (error) {
+      throw error;
+    }
+    return data;
+  };
 
-  console.log(JSON.stringify(posts, null, 2));
+  const {
+    data: data,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: fetchPosts,
+  });
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 justify-center items-center">
+        <ActivityIndicator />
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View className="flex-1 justify-center items-center">
+        <Text className="text-red-600">{error.message}</Text>
+      </View>
+    );
+  }
+
   return (
     <View className="flex-1 bg-black">
       <FlatList
-        data={posts}
+        data={data}
         renderItem={({ item }) => <PostListItem post={item} />}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => (
