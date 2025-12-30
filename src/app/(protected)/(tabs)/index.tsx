@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   FlatList,
   Pressable,
+  ScrollView,
   Text,
   View,
 } from "react-native";
@@ -11,8 +12,11 @@ import { Link } from "expo-router";
 import { Post } from "@/types";
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
+import { useHeaderHeight } from "node_modules/@react-navigation/elements";
 
 export default function HomeScreen() {
+  const headerHeight = useHeaderHeight();
+
   const fetchPosts = async () => {
     const { data, error } = await supabase
       .from("posts")
@@ -50,12 +54,17 @@ export default function HomeScreen() {
   }
 
   return (
-    <View className="flex-1 bg-black">
-      <FlatList
-        data={data}
-        renderItem={({ item }) => <PostListItem post={item} />}
-        showsVerticalScrollIndicator={false}
-      />
-    </View>
+    <ScrollView 
+      style={{ paddingTop: headerHeight }}
+      showsVerticalScrollIndicator={false}
+    >
+      <View className="flex-1 bg-black">
+        <FlatList
+          data={data}
+          renderItem={({ item }) => <PostListItem post={item} />}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </ScrollView>
   );
 }

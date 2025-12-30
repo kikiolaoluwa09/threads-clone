@@ -10,13 +10,27 @@ export default function ProtectedLayout() {
 
   return (
     <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="new"
         options={{
           presentation: "modal",
           animation: "slide_from_bottom",
           title: "New Thread",
+          headerStyle: {
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
+          headerBlurEffect: "regular",
+          headerTransparent: true,
+
         }}
       />
     </Stack>

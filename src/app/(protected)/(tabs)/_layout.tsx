@@ -35,6 +35,9 @@ export default function TabsLayout() {
           tabBarIcon: ({ size, color }) => (
             <Feather name="search" size={size} color={color} />
           ),
+          headerSearchBarOptions: {
+            placeholder: "Search",
+          },
         }}
       />
       <Tabs.Screen

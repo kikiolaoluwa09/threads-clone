@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -15,6 +16,7 @@ import { useAuth } from "@/providers/AuthProviders";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
+import {useHeaderHeight} from '@react-navigation/elements'
 
 const CreatePost = async (content: string, user_id: string) => {
   const { data, error } = await supabase
@@ -27,6 +29,9 @@ const CreatePost = async (content: string, user_id: string) => {
 };
 
 export default function NewPostScreen() {
+
+  const headerHeight = useHeaderHeight()
+
   const [text, setText] = useState("");
 
   const { user } = useAuth();
@@ -47,7 +52,8 @@ export default function NewPostScreen() {
   });
 
   return (
-    <SafeAreaView className="p-4 flex-1 bg-black">
+    <SafeAreaView className=" pt-28 p-4 flex-1 bg-neutral-950">
+      <ScrollView style={{paddingTop: headerHeight}} >
       <KeyboardAvoidingView
         className=""
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -77,6 +83,7 @@ export default function NewPostScreen() {
           </Pressable>
         </View>
       </KeyboardAvoidingView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
