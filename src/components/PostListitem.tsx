@@ -3,6 +3,7 @@ import { Post } from "@/types";
 import { Feather } from "@expo/vector-icons";
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { Link } from "expo-router";
 
 dayjs.extend(relativeTime)
 
@@ -11,7 +12,8 @@ export default function PostListItem({ post }: { post: Post }) {
 
 
   return (
-    <View className="flex-row p-4 border-b border-gray-800/70 bg-black">
+    <Link href={`/posts/${post.id}`} asChild>
+    <Pressable className="flex-row p-4 border-b border-gray-800/70 bg-black">
       {/* User Avatar */}
       <Pressable className="mr-3">
         <Image
@@ -60,6 +62,7 @@ export default function PostListItem({ post }: { post: Post }) {
           </Pressable>
         </View>
       </View>
-    </View>
+    </Pressable>
+    </Link>
   );
 }
