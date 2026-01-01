@@ -45,6 +45,7 @@ export default function postDetails() {
         data={replies || []}
         renderItem={({item}) => <PostListItem post={item}/>}
         ListHeaderComponent={<PostListItem post={post}/>}
+        showsVerticalScrollIndicator={false}
         />
 
       <PostReplyInput postId={id} />

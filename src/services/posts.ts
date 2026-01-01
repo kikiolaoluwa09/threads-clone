@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { TablesInsert } from "@/types/database.types";
 
-type PostInput = TablesInsert<'posts'>
+type PostInput = TablesInsert<"posts">;
 
 export const CreatePost = async (newPost: PostInput) => {
   const { data, error } = await supabase
@@ -12,24 +12,37 @@ export const CreatePost = async (newPost: PostInput) => {
 
   return data;
 };
+
+export const fetchPosts = async () => {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*, user:profiles(*), replies:posts(count)")
+    .throwOnError();
+
+  console.log(JSON.stringify(data, null, 2));
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
 export const getPostById = async (id: string) => {
-    const { data } = await supabase
-      .from("posts")
-      .select("*, user:profiles(*)")
-      .eq("id", id)
-      .single()
-      .throwOnError();
+  const { data } = await supabase
+    .from("posts")
+    .select("*, user:profiles(*), replies:posts(count)")
+    .eq("id", id)
+    .single()
+    .throwOnError();
 
-    return data;
-  };
-  
+  return data;
+};
+
 export const getPostReplies = async (id: string) => {
-    const { data } = await supabase
-      .from("posts")
-      .select("*, user:profiles(*)")
-      .eq("parent_id", id)
-      .throwOnError();
+  const { data } = await supabase
+    .from("posts")
+    .select("*, user:profiles(*), replies:posts(count)")
+    .eq("parent_id", id)
+    .throwOnError();
 
-    return data;
-  };
-  
+  return data;
+};

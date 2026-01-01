@@ -13,21 +13,9 @@ import { Post } from "@/types";
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { useHeaderHeight } from "node_modules/@react-navigation/elements";
-
+import { fetchPosts } from "@/services/posts";
 export default function HomeScreen() {
   const headerHeight = useHeaderHeight();
-
-  const fetchPosts = async () => {
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*, user:profiles(*)")
-      .throwOnError();
-
-    if (error) {
-      throw error;
-    }
-    return data;
-  };
 
   const {
     data: data,
