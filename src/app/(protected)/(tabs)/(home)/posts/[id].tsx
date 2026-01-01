@@ -1,13 +1,15 @@
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { ActivityIndicator, Text, View } from "react-native";
-import { useHeaderHeight } from "node_modules/@react-navigation/elements";
+import { ActivityIndicator, FlatList, ScrollView, Text, View } from "react-native";
+// import { useHeaderHeight } from "node_modules/@react-navigation/elements";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import PostListItem from "@/components/PostListitem";
+import PostReplyInput from "@/components/PostReplyInput";
 
 export default function postDetails() {
   //   const headerHeight = useHeaderHeight(); style={{paddingTop: headerHeight}}
+
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const getPostById = async (id: string) => {
@@ -24,6 +26,7 @@ export default function postDetails() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts", id],
     queryFn: () => getPostById(id),
+    staleTime: 1000 * 60 * 5,
   });
 
   if (isLoading) {
@@ -40,10 +43,16 @@ export default function postDetails() {
       </View>
     );
   }
-
+  // className="items-center justify-center"
   return (
-    <div className="items-center justify-center">
-        <PostListItem post={data}/>
-    </div>
+    <View className="flex-1 m-5">
+      <FlatList
+        data={[]}
+        renderItem={({item}) => <PostListItem post={item}/>}
+        ListHeaderComponent={<PostListItem post={data}/>}
+        />
+
+      <PostReplyInput postId={id} />
+    </View>
   );
 }

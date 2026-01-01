@@ -18,15 +18,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import {useHeaderHeight} from '@react-navigation/elements'
 
-const CreatePost = async (content: string, user_id: string) => {
-  const { data, error } = await supabase
-    .from("posts")
-    .insert({ content, user_id })
-    .throwOnError()
-    .select("*");
-
-  return data;
-};
+import { CreatePost } from "@/services/posts";
 
 export default function NewPostScreen() {
 
@@ -39,7 +31,7 @@ export default function NewPostScreen() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending, error } = useMutation({
-    mutationFn: () => CreatePost(text, user!.id),
+    mutationFn: () => CreatePost({ content: text,user_id: user!.id}),
 
     onSuccess: (data) => {
       setText("");

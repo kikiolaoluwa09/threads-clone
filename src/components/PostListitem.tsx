@@ -13,7 +13,7 @@ export default function PostListItem({ post }: { post: Post }) {
 
   return (
     <Link href={`/posts/${post.id}`} asChild>
-    <Pressable className="flex-row p-4 border-b border-gray-800/70 bg-black">
+    <Pressable className="flex-row p-4 border-b border-gray-800/70 ">
       {/* User Avatar */}
       <Pressable className="mr-3">
         <Image
