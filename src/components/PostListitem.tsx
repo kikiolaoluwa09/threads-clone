@@ -18,7 +18,7 @@ type PostWithUser = Tables<"posts"> & {
 export default function PostListItem({ post }: { post: PostWithUser }) {
   return (
     <Link href={`/posts/${post.id}`} asChild>
-      <Pressable className="flex-row p-4 border-b border-gray-800/70 ">
+      <Pressable className="flex-row p-4 border-b border-neutral-800/70 ">
         {/* User Avatar */}
         <Pressable className="mr-3">
           <Image

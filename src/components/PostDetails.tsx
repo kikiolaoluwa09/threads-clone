@@ -1,0 +1,79 @@
+import { Image, Pressable, Text, View } from "react-native";
+import { Post } from "@/types";
+import { Feather } from "@expo/vector-icons";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { Link } from "expo-router";
+import { Tables } from "@/types/database.types";
+
+dayjs.extend(relativeTime);
+
+type PostWithUser = Tables<"posts"> & {
+  user: Tables<"profiles">;
+  replies: {
+    count: number;
+  }[];
+};
+
+export default function PostDetails({ post }: { post: PostWithUser }) {
+  return (
+    <Link href={`/posts/${post.id}`} asChild>
+      <Pressable className="p-4 border-b border-neutral-800/70 ">
+        {/* Header: Avatar + User Info */}
+        <View className="flex-row mb-3 items-center">
+          <Pressable className="mr-3">
+            <Image
+              source={{ uri: post.user.avatar_url }}
+              className="w-12 h-12 rounded-full"
+            />
+          </Pressable>
+
+          <View className="flex-1">
+            <View className="flex-row items-center justify-between">
+              <View className="flex-row items-center">
+                <Text className="text-white font-black mr-1">
+                  {post.user.username}
+                </Text>
+                <Text className="text-gray-500 mr-2">@{post.user.name}</Text>
+                <Text className="text-gray-500">·</Text>
+                <Text className="text-gray-500 ml-2">
+                  {dayjs(post.created_at).fromNow()}
+                </Text>
+              </View>
+              <Pressable>
+                <Feather name="more-horizontal" size={16} color="#d1d5db" />
+              </Pressable>
+            </View>
+          </View>
+        </View>
+
+        {/* Post Content */}
+        <Text className="text-white mb-3 leading-5">{post.content}</Text>
+
+        {/* Interaction Buttons */}
+        <View className="flex-row gap-10 pr-10 ">
+          <Pressable className="flex-row items-center">
+            <Feather name="heart" size={20} color="#d1d5db" />
+            <Text className="text-gray-300 ml-2">0</Text>
+          </Pressable>
+
+          <Pressable className="flex-row items-center">
+            <Feather name="message-circle" size={20} color="#d1d5db" />
+            <Text className="text-gray-300 ml-2">
+              {post?.replies?.[0].count || 0}
+            </Text>
+          </Pressable>
+
+          <Pressable className="flex-row items-center">
+            <Feather name="repeat" size={20} color="#d1d5db" />
+            <Text className="text-gray-300 ml-2">0</Text>
+          </Pressable>
+
+          <Pressable>
+            <Feather name="send" size={20} color="#d1d5db" />
+          </Pressable>
+        </View>
+      </Pressable>
+    </Link>
+  );
+}

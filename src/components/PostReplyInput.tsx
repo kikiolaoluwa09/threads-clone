@@ -31,7 +31,7 @@ export default function PostReplyInput({ postId }: { postId: string }) {
   });
 
   return (
-    <View className="p-2">
+    <View className="p-2 ">
       <View className=" flex-row gap-2 bg-neutral-700 shadow-md p-4 rounded-md tex-xl">
         <TextInput
           value={text}
