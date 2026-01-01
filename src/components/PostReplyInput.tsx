@@ -24,7 +24,7 @@ export default function PostReplyInput({ postId }: { postId: string }) {
     onSuccess: (data) => {
       setText("");
       router.back();
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["posts", postId, 'replies'] });
     },
     onError: (error) => {
       console.error(error);
