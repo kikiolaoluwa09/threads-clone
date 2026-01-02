@@ -35,8 +35,6 @@ export const getPostById = async (id: string) => {
     .single()
     .throwOnError();
 
-    console.log(JSON.stringify(data, null ,2))
-
   return data;
 };
 

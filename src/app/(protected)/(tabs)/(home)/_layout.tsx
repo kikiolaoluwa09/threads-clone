@@ -8,7 +8,7 @@ export default function HomeLayout() {
         options={{
           title: "Home",
           headerStyle: {
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
           },
           headerTitleStyle: {
             fontSize: 36,

@@ -42,14 +42,14 @@ export default function HomeScreen() {
   }
 
   return (
-    <ScrollView 
+    <ScrollView
       style={{ paddingTop: headerHeight }}
       showsVerticalScrollIndicator={false}
     >
       <View className="flex-1 bg-black">
         <FlatList
           data={data}
-          renderItem={({ item }) => <PostListItem post={item} />}
+          renderItem={({ item }) => <PostListItem post={item} isLastInGroup={true} />}
           showsVerticalScrollIndicator={false}
         />
       </View>
