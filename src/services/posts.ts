@@ -29,10 +29,12 @@ export const fetchPosts = async () => {
 export const getPostById = async (id: string) => {
   const { data } = await supabase
     .from("posts")
-    .select("*, user:profiles(*), replies:posts(count)")
+    .select("*, user:profiles(*), replies:posts(count),  parent:posts(*)")
     .eq("id", id)
     .single()
     .throwOnError();
+
+    console.log(JSON.stringify(data, null ,2))
 
   return data;
 };
