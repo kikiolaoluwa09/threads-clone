@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "expo-router";
 import { Tables } from "@/types/database.types";
+import { supabase } from "@/lib/supabase";
 
 dayjs.extend(relativeTime);
 
@@ -36,7 +37,7 @@ export default function PostListItem({
             className="w-12 h-12 rounded-full"
           />
           {!isLastInGroup && (
-            <View className="w-[3px] flex-1 rounded-full bg-neutral-800 translate-y-2 scale-125" />
+            <View className="w-[3px] flex-1 rounded-full bg-neutral-800 translate-y-2 " />
           )}
         </Pressable>
 
@@ -48,7 +49,7 @@ export default function PostListItem({
               <Text className="text-white font-black mr-1">
                 {post.user.username}
               </Text>
-              <Text className="text-gray-500 mr-2">@{post.user.name}</Text>
+              <Text className="text-gray-500 mr-2">@{post.user.username}</Text>
               <Text className="text-gray-500">·</Text>
               <Text className="text-gray-500 ml-2">
                 {dayjs(post.created_at).fromNow()}
@@ -61,6 +62,20 @@ export default function PostListItem({
 
           {/* Post Content */}
           <Text className="text-white mt-1 mb-3 leading-5">{post.content}</Text>
+          {post.images && (
+            <View className="flex-row gap-2 mt-2">
+              {post.images.map((image) => (
+                <Image
+                  key={image}
+                  source={{
+                    uri: supabase.storage.from("media").getPublicUrl(image).data
+                      .publicUrl,
+                  }}
+                  className="w-full aspect-square rounded-lg"
+                />
+              ))}
+            </View>
+          )}
 
           {/* Interaction Buttons */}
           <View className="flex-row justify-between pr-10 mt-2 max-w-xs">
