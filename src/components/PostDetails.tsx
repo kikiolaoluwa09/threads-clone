@@ -6,6 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "expo-router";
 import { Tables } from "@/types/database.types";
 import { supabase } from "@/lib/supabase";
+import SupabaseImage from "./SupabaseImage";
 
 dayjs.extend(relativeTime);
 
@@ -23,8 +24,9 @@ export default function PostDetails({ post }: { post: PostWithUser }) {
         {/* Header: Avatar + User Info */}
         <View className="flex-row mb-3 items-center">
           <Pressable className="mr-3">
-            <Image
-              source={{ uri: post.user.avatar_url }}
+            <SupabaseImage
+              bucket="avatars"
+              path={post.user.avatar_url}
               className="w-12 h-12 rounded-full"
             />
           </Pressable>
@@ -35,7 +37,9 @@ export default function PostDetails({ post }: { post: PostWithUser }) {
                 <Text className="text-white font-black mr-1">
                   {post.user.username}
                 </Text>
-                <Text className="text-gray-500 mr-2">@{post.user.username}</Text>
+                <Text className="text-gray-500 mr-2">
+                  @{post.user.username}
+                </Text>
                 <Text className="text-gray-500">·</Text>
                 <Text className="text-gray-500 ml-2">
                   {dayjs(post.created_at).fromNow()}
@@ -49,22 +53,20 @@ export default function PostDetails({ post }: { post: PostWithUser }) {
         </View>
 
         {/* Post Content */}
-             <Text className="text-white mt-1 mb-3 leading-5">{post.content}</Text>
+        <Text className="text-white mt-1 mb-3 leading-5">{post.content}</Text>
 
-         {post.images && (
-                    <View className="flex-row gap-2 mt-2 mb-3">
-                      {post.images.map((image) => (
-                        <Image
-                          key={image}
-                          source={{
-                            uri: supabase.storage.from("media").getPublicUrl(image).data
-                              .publicUrl,
-                          }}
-                          className="w-full aspect-square rounded-lg"
-                        />
-                      ))}
-                    </View>
-                  )}
+        {post.images && (
+          <View className="flex-row gap-2 mt-2 mb-3">
+            {post.images.map((image) => (
+              <SupabaseImage
+                key={image}
+                bucket="media"
+                path={image}
+                className="w-full aspect-square rounded-lg"
+              />
+            ))}
+          </View>
+        )}
 
         {/* Interaction Buttons */}
         <View className="flex-row gap-10 pr-10 ">

@@ -1,3 +1,4 @@
+import UserAvatarPicker from "@/components/UserAvatarPicker";
 import { useAuth } from "@/providers/AuthProviders";
 import { getProfileById, updateProfile } from "@/services/profiles";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -11,6 +12,7 @@ export default function ProfileEditScreen() {
 
   const [fullName, setFullName] = useState("");
   const [bio, setBio] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
 
   const {
     data: profile,
@@ -23,24 +25,36 @@ export default function ProfileEditScreen() {
   useEffect(() => {
     setFullName(profile?.full_name);
     setBio(profile?.bio);
+    setAvatarUrl(profile?.avatar_url);
   }, [profile?.id]);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: () => updateProfile(user!.id, { full_name: fullName, bio }),
+    mutationFn: () =>
+      updateProfile(user!.id, {
+        full_name: fullName,
+        bio,
+        avatar_url: avatarUrl,
+      }),
     onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['profile', user?.id]})
+      queryClient.invalidateQueries({ queryKey: ["profile", user?.id] });
       router.back();
     },
   });
 
   return (
     <View className="flex-1 p-4 gap-4">
+      <UserAvatarPicker
+        currentAvatar={profile?.avatar_url}
+        onUpload={setAvatarUrl}
+      />
+      <Text className="text-white text-2xl font-bold">Fullname</Text>
       <TextInput
         value={fullName}
         onChangeText={setFullName}
         placeholder="Full Name"
         className="text-white  border-2 border-neutral-700 rounded-md p-4 "
       />
+      <Text className="text-white text-2xl font-bold">Bio</Text>
       <TextInput
         value={bio}
         onChangeText={setBio}
