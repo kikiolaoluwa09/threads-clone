@@ -32,7 +32,12 @@ export default function Profile() {
     queryFn: () => getProfileById(user!.id),
   });
 
-  if (isLoading) return <ActivityIndicator />;
+  if (isLoading)
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator />
+      </View>
+    );
   if (error) return <Text>Error: {error.message}</Text>;
 
   return (
@@ -48,7 +53,9 @@ export default function Profile() {
         ListHeaderComponent={
           <>
             <ProfileHeader />
-            <Text className="text-white text-lg font-bold mt-4 m-2">Threads</Text>
+            <Text className="text-white text-lg font-bold mt-4 m-2">
+              Threads
+            </Text>
           </>
         }
         ListEmptyComponent={<Text className="text-white">No posts yet</Text>}
