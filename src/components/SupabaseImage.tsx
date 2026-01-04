@@ -20,20 +20,23 @@ export default function SupabaseImage({
   bucket,
   path,
   className,
-  width,
-  height,
+  width = 100,
+  height = 100,
 }: {
   bucket: string;
   path: string;
   className: string;
-  width: number,
-  height: number;
+  width?: number;
+  height?: number;
 }) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["supabaseImage", path],
     queryFn: () => downloadImage(bucket, path),
   });
-  if (isLoading) return <ActivityIndicator />;
+  if (isLoading)
+    return (
+      <View style={{width, height}} className={`bg-neutral-900 ${className}`}/>
+    );
   if (error)
     return <Text className="text-red-500">Error: {error.message}</Text>;
 
@@ -41,6 +44,8 @@ export default function SupabaseImage({
     <Image
       source={{
         uri: data,
+        width,
+        height,
       }}
       className={className}
     />

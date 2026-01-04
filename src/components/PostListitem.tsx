@@ -36,7 +36,9 @@ export default function PostListItem({
         <SupabaseImage
           bucket="avatars"
           path={post.user.avatar_url}
-          className="w-12 h-12 rounded-full"
+          className=" rounded-full"
+          width={50}
+          height={50}
         />
           {!isLastInGroup && (
             <View className="w-[3px] flex-1 rounded-full bg-neutral-800 translate-y-2 " />
