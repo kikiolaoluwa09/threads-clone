@@ -20,10 +20,14 @@ export default function SupabaseImage({
   bucket,
   path,
   className,
+  width,
+  height,
 }: {
   bucket: string;
   path: string;
   className: string;
+  width: number,
+  height: number;
 }) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["supabaseImage", path],
