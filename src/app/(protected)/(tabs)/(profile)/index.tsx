@@ -57,14 +57,7 @@ export default function Profile() {
         ListEmptyComponent={<Text className="text-white">No posts yet</Text>}
         showsVerticalScrollIndicator={false}
       />
-      {/* <Pressable
-        onPress={() => supabase.auth.signOut}
-        className="bg-gray-800 p-4 rounded-lg w-32"
-      >
-        <Text className="text-white text-center font-bold text-lg">
-          Sign Out
-        </Text>
-      </Pressable> */}
+   
     </View>
   );
 }

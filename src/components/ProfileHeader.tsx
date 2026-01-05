@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "expo-router";
 import { ActivityIndicator, Image, Pressable, Text, View } from "react-native";
 import SupabaseImage from "./SupabaseImage";
+import { supabase } from "@/lib/supabase";
 
 export default function ProfileHeader() {
   const { user } = useAuth();
@@ -43,10 +44,23 @@ export default function ProfileHeader() {
             <Text className="text-center text-neutral-200">Edit Profile</Text>
           </Pressable>
         </Link>
-        <Pressable className="flex-1 rounded-xl border-2 border-neutral-700 py-2">
-          <Text className="text-center text-neutral-200">Share Profile</Text>
+        <Pressable
+          className="flex-1 rounded-xl border-2 border-neutral-700 py-2"
+          onPress={() => supabase.auth.signOut}
+        >
+          <Text className="text-center text-neutral-200">Logout</Text>
         </Pressable>
       </View>
     </View>
   );
+}
+{
+  /* <Pressable
+        onPress={() => supabase.auth.signOut}
+        className="bg-gray-800 p-4 rounded-lg w-32"
+      >
+        <Text className="text-white text-center font-bold text-lg">
+          Sign Out
+        </Text>
+      </Pressable> */
 }
