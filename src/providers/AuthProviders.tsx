@@ -1,25 +1,30 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '../lib/supabase';
-import { ActivityIndicator } from 'react-native';
-import { View } from 'react-native';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { Session, User } from "@supabase/supabase-js";
+import { supabase } from "../lib/supabase";
+import { ActivityIndicator } from "react-native";
+import { View } from "react-native";
+import { useQuery } from "@tanstack/react-query";
+import { getProfileById } from "@/services/profiles";
+import { Tables } from "@/types/database.types";
 
 type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
+  profile: Tables<"profiles"> | null;
   signOut: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false,
+  profile: null,
   signOut: async () => {},
 });
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -30,7 +35,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  
+
+  const { data: profile } = useQuery({
+    queryKey: ["profile", user?.id],
+    queryFn: () => getProfileById(user!.id),
+  });
+
   const signOut = async () => {
     await supabase.auth.signOut();
   };
@@ -65,14 +75,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   if (isLoading) {
     return (
-      <View className='flex-1 items-center justify-center'>
-        <ActivityIndicator size='large' />
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator size="large" />
       </View>
     );
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signOut }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signOut, profile }}>
       {children}
     </AuthContext.Provider>
   );

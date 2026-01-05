@@ -17,20 +17,19 @@ import Entypo from "@expo/vector-icons/Entypo";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/providers/AuthProviders";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
-import { useHeaderHeight } from "@react-navigation/elements";
 
 import { CreatePost } from "@/services/posts";
+import { getProfileById } from "@/services/profiles";
+import SupabaseImage from "@/components/SupabaseImage";
 
 export default function NewPostScreen() {
   const [image, setImage] = useState<ImagePicker.ImagePickerAsset | null>(null);
 
-  const headerHeight = useHeaderHeight();
-
   const [text, setText] = useState("");
 
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
 
   const queryClient = useQueryClient();
 
@@ -80,8 +79,6 @@ export default function NewPostScreen() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0]);
     }
@@ -106,39 +103,56 @@ export default function NewPostScreen() {
   };
 
   return (
-    <SafeAreaView className=" pt-28 p-4 flex-1 bg-neutral-950">
-      <ScrollView style={{ paddingTop: headerHeight }}>
+    <SafeAreaView className="  pt-28 p-4 flex-1  bg-neutral-950">
+      <ScrollView>
         <KeyboardAvoidingView
           className=""
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={Platform.OS === "ios" ? 140 : 0}
         >
-          <Text className="text-white font-extrabold text-xl">username</Text>
-
-          <TextInput
-            value={text}
-            onChangeText={setText}
-            placeholder="What's new?"
-            className="text-white text-lg "
-            placeholderTextColor="#71717a"
-            multiline
-            numberOfLines={4}
+          <View className="flex-row gap-4 ">
+          <SupabaseImage
+            bucket="avatars"
+            path={profile?.avatar_url}
+            className="w-12 h-12 rounded-full"
+            transform={{ width: 50, height: 50 }}
           />
+          <View>
+            <Text className="text-white font-extrabold text-xl">
+              @{profile?.username}
+            </Text>
 
-          {image && (
-            <Image
-              source={{ uri: image.uri }}
-              className="w-3/5 h-40 rounded-lg my-4"
-              style={{ aspectRatio: image.width / image.height }}
+            <TextInput
+              value={text}
+              onChangeText={setText}
+              placeholder="What's new?"
+              className="text-white text-lg "
+              placeholderTextColor="#71717a"
+              multiline
+              numberOfLines={4}
             />
-          )}
 
-          {error && (
-            <Text className="text-red-500 text-sm mt-4">{error.message}</Text>
-          )}
+            {image && (
+              <Image
+                source={{ uri: image.uri }}
+                className="w-3/5 h-40 rounded-lg my-4"
+                style={{ aspectRatio: image.width / image.height }}
+              />
+            )}
 
-          <View className="flex-row items-center gap-2 mt-2">
-            <Entypo onPress={pickImage} name="images" size={24} color="gray" />
+            {error && (
+              <Text className="text-red-500 text-sm mt-4">{error.message}</Text>
+            )}
+
+            <View className="flex-row items-center gap-2 mt-2">
+              <Entypo
+                onPress={pickImage}
+                name="images"
+                size={24}
+                color="gray"
+              />
+            </View>
+          </View>
           </View>
 
           <View className="mt-auto">

@@ -25,12 +25,8 @@ export default function ProtectedLayout() {
           headerStyle: {
             backgroundColor: "rgba(0, 0, 0, 0.8)",
           },
-          headerTitleStyle: {
-            color: "white",
-          },
           headerBlurEffect: "regular",
-          headerTransparent: true,
-
+          headerBackButtonDisplayMode: "generic",
         }}
       />
     </Stack>

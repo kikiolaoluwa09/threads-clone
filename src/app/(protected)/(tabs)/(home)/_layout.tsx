@@ -8,14 +8,8 @@ export default function HomeLayout() {
         options={{
           title: "Home",
           headerStyle: {
-            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
           },
-          headerTitleStyle: {
-            fontSize: 36,
-            fontWeight: "bold",
-            color: "white",
-          },
-          headerTransparent: true,
         }}
       />
       <Stack.Screen
@@ -23,15 +17,6 @@ export default function HomeLayout() {
         options={{
           title: "Thread",
           headerBackButtonDisplayMode: "generic",
-        //   headerStyle: {
-        //     backgroundColor: "rgba(0, 0, 0, 0.8)",
-        //   },
-        //   headerTitleStyle: {
-        //     fontSize: 36,
-        //     fontWeight: "bold",
-        //     color: "white",
-        //   },
-        //   headerTransparent: true,
         }}
       />
     </Stack>

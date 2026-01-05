@@ -10,12 +10,11 @@ import { useAuth } from "@/providers/AuthProviders";
 import { useQuery } from "@tanstack/react-query";
 import { getPostsByUserId } from "@/services/posts";
 import PostListItem from "@/components/PostListitem";
-import { useHeaderHeight } from "node_modules/@react-navigation/elements";
+
 import { getProfileById } from "@/services/profiles";
 import ProfileHeader from "@/components/ProfileHeader";
 
 export default function Profile() {
-  const headerHeight = useHeaderHeight();
   const { user } = useAuth();
 
   const {
@@ -41,10 +40,7 @@ export default function Profile() {
   if (error) return <Text>Error: {error.message}</Text>;
 
   return (
-    <View
-      style={{ paddingTop: headerHeight }}
-      className="flex-1 justify-center"
-    >
+    <View className="flex-1 justify-center">
       <FlatList
         data={posts}
         renderItem={({ item }) => (

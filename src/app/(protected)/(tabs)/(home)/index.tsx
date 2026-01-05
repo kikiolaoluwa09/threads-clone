@@ -12,11 +12,9 @@ import { Link } from "expo-router";
 import { Post } from "@/types";
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
-import { useHeaderHeight } from "node_modules/@react-navigation/elements";
+
 import { fetchPosts } from "@/services/posts";
 export default function HomeScreen() {
-  const headerHeight = useHeaderHeight();
-
   const {
     data: data,
     isLoading,
@@ -42,14 +40,13 @@ export default function HomeScreen() {
   }
 
   return (
-    <ScrollView
-      style={{ paddingTop: headerHeight }}
-      showsVerticalScrollIndicator={false}
-    >
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View className="flex-1 bg-black">
         <FlatList
           data={data}
-          renderItem={({ item }) => <PostListItem post={item} isLastInGroup={true} />}
+          renderItem={({ item }) => (
+            <PostListItem post={item} isLastInGroup={true} />
+          )}
           showsVerticalScrollIndicator={false}
         />
       </View>
