@@ -13,6 +13,7 @@ export default function ProfileEditScreen() {
   const [fullName, setFullName] = useState("");
   const [bio, setBio] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [userName, setUserName] = useState("");
 
   const {
     data: profile,
@@ -24,6 +25,7 @@ export default function ProfileEditScreen() {
   });
   useEffect(() => {
     setFullName(profile?.full_name);
+    setUserName(profile?.username);
     setBio(profile?.bio);
     setAvatarUrl(profile?.avatar_url);
   }, [profile?.id]);
@@ -34,6 +36,7 @@ export default function ProfileEditScreen() {
         full_name: fullName,
         bio,
         avatar_url: avatarUrl,
+        username: userName,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profile", user?.id] });
@@ -52,17 +55,29 @@ export default function ProfileEditScreen() {
         value={fullName}
         onChangeText={setFullName}
         placeholder="Full Name"
+        placeholderTextColor="#71717a"
         className="text-white  border-2 border-neutral-700 rounded-md p-4 "
       />
+      <Text className="text-white text-2xl font-bold">Username</Text>
+      <TextInput
+        value={userName}
+        onChangeText={setUserName}
+        placeholder="UserName"
+        placeholderTextColor="#71717a"
+        className="text-white  border-2 border-neutral-700 rounded-md p-4"
+      />
       <Text className="text-white text-2xl font-bold">Bio</Text>
+
       <TextInput
         value={bio}
         onChangeText={setBio}
         placeholder="Bio"
+        placeholderTextColor="#71717a"
         className="text-white  border-2 border-neutral-700 rounded-md p-4"
         multiline
         numberOfLines={5}
       />
+
       <View className="mt-auto">
         <Pressable
           onPress={() => mutate()}

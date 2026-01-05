@@ -23,9 +23,8 @@ export default function ProtectedLayout() {
           animation: "slide_from_bottom",
           title: "New Thread",
           headerStyle: {
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backgroundColor: "black",
           },
-          headerBlurEffect: "regular",
           headerBackButtonDisplayMode: "generic",
         }}
       />

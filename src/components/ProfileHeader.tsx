@@ -46,10 +46,11 @@ export default function ProfileHeader() {
         </Link>
         <Pressable
           className="flex-1 rounded-xl border-2 border-neutral-700 py-2"
-          onPress={() => supabase.auth.signOut}
+          onPress={() => supabase.auth.signOut()}
         >
           <Text className="text-center text-neutral-200">Logout</Text>
         </Pressable>
+        
       </View>
     </View>
   );

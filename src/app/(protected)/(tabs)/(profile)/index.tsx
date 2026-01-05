@@ -40,7 +40,7 @@ export default function Profile() {
   if (error) return <Text>Error: {error.message}</Text>;
 
   return (
-    <View className="flex-1 justify-center">
+    <View className=" bg-black flex-1 justify-center">
       <FlatList
         data={posts}
         renderItem={({ item }) => (
@@ -54,7 +54,7 @@ export default function Profile() {
             </Text>
           </>
         }
-        ListEmptyComponent={<Text className="text-white">No posts yet</Text>}
+        ListEmptyComponent={(<View className="flex-1 items-center justify-center"><Text className="text-white">No posts yet</Text></View>)}
         showsVerticalScrollIndicator={false}
       />
    
