@@ -29,8 +29,6 @@ export default function SignUpScreen() {
         Alert.alert("Please check your inbox for email verification!");
 
       console.log("Login:", { email, password });
-      // Simulate API call
-      // await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (error) {
       Alert.alert("Error", "signup failed");
     } finally {
