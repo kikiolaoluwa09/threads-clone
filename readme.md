@@ -6,7 +6,8 @@ A simple Threads-style mobile app built with Expo Router, Supabase (Auth + DB + 
 
 ![Home]/(assets/home.jpeg)
 ![Post details](assets/second.png)
-![Profile](assets/third.png)
+![Profile](assets/third.png)	
+![Home](assets/home.jpeg)
 
 ## Features
 
